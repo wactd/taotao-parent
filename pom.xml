@@ -140,6 +140,7 @@
                     <version>2.2</version>
                     <!--<configuration>-->
                         <!--<url>http://localhost:8080/manager/text</url>-->
+
                         <!--<path>/</path>-->
                         <!--<server>tomcat</server>-->
                         <!--<username>admin</username>-->
