@@ -22,6 +22,14 @@ public class TestMapper extends SpringJunitTest{
     @Resource
     private TbUserMapper tbUserMapper;
 
+    @Resource
+    private DataSource dataSource;
+
+    @Test
+    public void dataSourceTest() {
+        System.out.println(dataSource);
+    }
+
     @Test
     public void selectByExampleTest() {
         TbUserExample example = new TbUserExample();
