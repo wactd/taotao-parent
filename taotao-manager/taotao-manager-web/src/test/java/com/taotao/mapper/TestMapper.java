@@ -4,6 +4,7 @@ import com.alibaba.druid.filter.AutoLoad;
 import com.taotao.pojo.TbUser;
 import com.taotao.pojo.TbUserExample;
 import com.taotao.spring.SpringJunitTest;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class TestMapper extends SpringJunitTest{
     public void selectByExampleTest() {
         TbUserExample example = new TbUserExample();
         List<TbUser> users = tbUserMapper.selectByExample(example);
-        users.forEach(System.out::println);
+//        Assert.assertNotNull();
     }
 
 }
