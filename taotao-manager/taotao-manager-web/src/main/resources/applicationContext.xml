@@ -27,4 +27,6 @@
     <!--@see http://blog.csdn.net/Rickesy/article/details/50791534-->
 
     <import resource="classpath:spring/spring-dao.xml"/>
+    <import resource="classpath:spring/spring-trans.xml"/>
+    <import resource="classpath:spring/spring-service.xml"/>
 </beans>
