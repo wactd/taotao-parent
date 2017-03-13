@@ -3,11 +3,6 @@ SET character_set_client = utf8;
 SET character_set_results = utf8;
 SET character_set_connection = utf8;
 
-安裝Mysql.zip，需要設置
-在[mysqld]下面加入一行
-character_set_server = utf8
-在[mysql]下面加入一行
-default-character-set = utf8
 
 修改root 密码：
 
@@ -18,3 +13,10 @@ default-character-set = utf8
 3、flush privileges;
 
 4、>exit; 登出后，重新登录时就需要新设的密码了
+第一步：解壓mysql.zip
+第二部：修改my-default.ini为my.ini文件
+[mysqld]
+ basedir = D:\JavaApp\mysql-5.6.35-winx64
+ datadir = D:\JavaApp\mysql-5.6.35-winx64\data
+ port = 3306
+ sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
