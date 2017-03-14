@@ -1,6 +1,11 @@
 package com.taotao.mapper;
 
 import com.alibaba.druid.filter.AutoLoad;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemExample;
 import com.taotao.pojo.TbUser;
 import com.taotao.pojo.TbUserExample;
 import com.taotao.spring.SpringJunitTest;
@@ -21,21 +26,22 @@ import java.util.List;
 public class TestMapper extends SpringJunitTest{
 
     @Resource
-    private TbUserMapper tbUserMapper;
-
-    @Resource
-    private DataSource dataSource;
-
-    @Test
-    public void dataSourceTest() {
-        System.out.println(dataSource);
-    }
+    private TbItemMapper tbItemMapper;
 
     @Test
     public void selectByExampleTest() {
-        TbUserExample example = new TbUserExample();
-        List<TbUser> users = tbUserMapper.selectByExample(example);
-//        Assert.assertNotNull();
+
+        TbItemExample example = new TbItemExample();
+
+
+        Page<TbItem> page = PageHelper.startPage(1, 1);
+
+        List<TbItem> tbItems =tbItemMapper.selectByExample(example);
+
+        List<TbItem> result = page.getResult();
+        System.out.println(JSONObject.toJSONString(page));
+
+        Assert.assertEquals(tbItems.size(), result.size());
     }
 
 }
