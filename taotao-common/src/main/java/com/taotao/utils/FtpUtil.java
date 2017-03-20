@@ -1,4 +1,4 @@
-package com.taotao.common.utils;
+package com.taotao.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

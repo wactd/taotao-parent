@@ -1,6 +1,7 @@
 package com.taotao.service;
 
 import com.taotao.common.pojo.EUDataGridResult;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 
 /**
@@ -23,4 +24,10 @@ public interface ItemService {
      */
     EUDataGridResult<TbItem> selectItems(Integer page, Integer rows);
 
+    /**
+     * 添加上爬
+     * @param tbItem
+     * @return
+     */
+    TaotaoResult addItem(TbItem tbItem);
 }

@@ -29,6 +29,7 @@
         <!--阿里巴巴-->
         <druid-version>1.0.18</druid-version>
         <fastjson-version>1.2.12</fastjson-version>
+        <!--<fastjson-version>1.2.24</fastjson-version>-->
         <!--spring-->
         <spring-framework-bom-version>4.2.8.RELEASE</spring-framework-bom-version>
         <platform-bom-version>2.0.8.RELEASE</platform-bom-version>
