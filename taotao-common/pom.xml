@@ -32,6 +32,10 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
@@ -66,5 +70,7 @@
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
         <!--logback日志 End-->
+
+
     </dependencies>
 </project>

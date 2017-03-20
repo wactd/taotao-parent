@@ -10,15 +10,15 @@
         </encoder>
     </appender>
 
-    <logger name="org.apache.ibatis" level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </logger>
-    <logger name="java.sql" level="DEBUG">
-        <appender-ref ref="STDOUT"/>
-    </logger>
-    <logger name="org.springframework" level="OFF">
-        <appender-ref ref="STDOUT"/>
-    </logger>
+    <!--<logger name="org.apache.ibatis" level="INFO">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
+    <!--<logger name="java.sql" level="DEBUG">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
+    <!--<logger name="org.springframework" level="OFF">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
 
     <!-- 日志输出级别   -->
     <root level="DEBUG">

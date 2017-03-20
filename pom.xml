@@ -104,6 +104,13 @@
                 <version>${pagehelper-version}</version>
             </dependency>
             <!--mybatis End-->
+
+            <dependency>
+                <groupId>javax.serlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <scope>provided</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
