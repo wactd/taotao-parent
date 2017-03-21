@@ -4,7 +4,6 @@ import com.taotao.common.pojo.EuTreeNode;
 import com.taotao.mapper.TbItemCatMapper;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemCatExample;
-import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemCatService;
 import org.springframework.stereotype.Service;
 

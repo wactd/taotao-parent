@@ -23,8 +23,8 @@ public class ItemController {
 
     @ResponseBody
     @RequestMapping(value = "/item/save", method = RequestMethod.POST)
-    public TaotaoResult addItem(TbItem tbItem) {
-        TaotaoResult result = itemService.addItem(tbItem);
+    public TaotaoResult addItem(TbItem tbItem, String desc) {
+        TaotaoResult result = itemService.addItem(tbItem, desc);
         return result;
     }
 

@@ -1,23 +1,23 @@
 package com.taotao.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemService;
 import com.taotao.utils.IDUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 商品表service
@@ -29,6 +29,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Resource
     private TbItemMapper tbItemMapper;
+
+    @Resource
+    private TbItemDescMapper tbItemDescMapper;
 
     @Override
     public TbItem selectItemById(Long itemId) {
@@ -46,7 +49,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public EUDataGridResult<TbItem> selectItems(Integer page, Integer rows) {
         TbItemExample example = new TbItemExample();
-
+        example.setOrderByClause("created desc");
         PageHelper.startPage(page, rows);
         List<TbItem> items = tbItemMapper.selectByExample(example);
 
@@ -59,7 +62,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public TaotaoResult addItem(TbItem tbItem) {
+    @Transactional(rollbackFor = Throwable.class)
+    public TaotaoResult addItem(TbItem tbItem, String desc) {
         // item不全
         // 生成商品ID
         long itemId = IDUtils.genItemId();
@@ -70,7 +74,17 @@ public class ItemServiceImpl implements ItemService {
         tbItem.setUpdated(new Date());
         // 插入到数据库
         tbItemMapper.insert(tbItem);
+        addItemDesc(itemId, desc);
         return TaotaoResult.ok();
+    }
+
+    private void addItemDesc(Long itemId, String desc) {
+        TbItemDesc itemDesc = new TbItemDesc();
+        itemDesc.setItemId(itemId);
+        itemDesc.setItemDesc(desc);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+        tbItemDescMapper.insertSelective(itemDesc);
     }
 
 }

@@ -27,7 +27,8 @@ public interface ItemService {
     /**
      * 添加上爬
      * @param tbItem
+     * @param desc
      * @return
      */
-    TaotaoResult addItem(TbItem tbItem);
+    TaotaoResult addItem(TbItem tbItem, String desc);
 }
