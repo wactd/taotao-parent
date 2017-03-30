@@ -2,12 +2,16 @@ package com.taotao.mapper;
 
 import com.taotao.pojo.TbItemParam;
 import com.taotao.pojo.TbItemParamExample;
+import com.taotao.pojo.TbItemParamExt;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @MyBatisMapper
 public interface TbItemParamMapper {
+
+    List<TbItemParamExt> selectTbItemParamList(TbItemParamExt paramExt);
+
     long countByExample(TbItemParamExample example);
 
     int deleteByExample(TbItemParamExample example);
