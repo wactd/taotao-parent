@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@MyBatisMapper
 public interface TbItemParamItemMapper {
     long countByExample(TbItemParamItemExample example);
 

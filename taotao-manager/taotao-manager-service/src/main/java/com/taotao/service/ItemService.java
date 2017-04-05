@@ -30,5 +30,5 @@ public interface ItemService {
      * @param desc
      * @return
      */
-    TaotaoResult addItem(TbItem tbItem, String desc);
+    TaotaoResult addItem(TbItem tbItem, String desc, String itemParam);
 }
