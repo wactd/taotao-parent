@@ -21,19 +21,6 @@ import java.util.Map;
 @Service
 public class PictureServiceImpl implements PictureService {
 
-
-    @Value("${ftp.host}")
-    private String FTP_HOST;
-
-    @Value("${ftp.port}")
-    private Integer FTP_PORT;
-
-    @Value("${ftp.username}")
-    private String FTP_USERNAME;
-
-    @Value("${ftp.passwd}")
-    private String FTP_PASSED;
-
     @Value("${ftp.base.path}")
     private String FTP_BASE_PATH;
 
@@ -55,8 +42,9 @@ public class PictureServiceImpl implements PictureService {
 
         try {
             InputStream inputStream = multipartFile.getInputStream();
-            boolean b = FtpUtil.uploadFile(FTP_HOST, FTP_PORT, FTP_PASSED, FTP_USERNAME, FTP_BASE_PATH,
-                    format, imageName, inputStream);
+            // boolean b = FtpUtil.uploadFile(FTP_HOST, FTP_PORT, FTP_PASSED, FTP_USERNAME, FTP_BASE_PATH,
+            //         format, imageName, inputStream);
+            boolean b = FtpUtil.uploadFile(FTP_BASE_PATH, format, imageName, inputStream);
             if (b) {
                 result = new HashMap<>();
                 result.put("error", 0);
