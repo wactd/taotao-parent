@@ -1,5 +1,5 @@
- /*
- Date: 2014-01-21 
+/*
+ Date: 2014-01-21
  */
 function login() {
     return location.href = "/user/login.html";
@@ -405,7 +405,7 @@ var searchlog = function() {
     return f
 }();
 if (function(a) {
-    a.extend(a.browser, {client: function() {
+        a.extend(a.browser, {client: function() {
             return {width: document.documentElement.clientWidth,height: document.documentElement.clientHeight,bodyWidth: document.body.clientWidth,bodyHeight: document.body.clientHeight}
         },scroll: function() {
             return {width: document.documentElement.scrollWidth,height: document.documentElement.scrollHeight,bodyWidth: document.body.scrollWidth,bodyHeight: document.body.scrollHeight,left: document.documentElement.scrollLeft + document.body.scrollLeft,top: document.documentElement.scrollTop + document.body.scrollTop}
@@ -416,164 +416,164 @@ if (function(a) {
         },isMinH: function(b) {
             return a.browser.client().height <= b
         }})
-}(jQuery), function(a) {
-    a.fn.hoverForIE6 = function(b) {
-        var c = a.extend({current: "hover",delay: 10}, b || {});
-        a.each(this, function() {
-            var b = null, d = null, e = !1;
-            a(this).bind("mouseover", function() {
-                if (e)
-                    clearTimeout(d);
-                else {
-                    var f = a(this);
-                    b = setTimeout(function() {
-                        f.addClass(c.current), e = !0
-                    }, c.delay)
-                }
-            }).bind("mouseout", function() {
-                if (e) {
-                    var f = a(this);
-                    d = setTimeout(function() {
-                        f.removeClass(c.current), e = !1
-                    }, c.delay)
-                } else
-                    clearTimeout(b)
+    }(jQuery), function(a) {
+        a.fn.hoverForIE6 = function(b) {
+            var c = a.extend({current: "hover",delay: 10}, b || {});
+            a.each(this, function() {
+                var b = null, d = null, e = !1;
+                a(this).bind("mouseover", function() {
+                    if (e)
+                        clearTimeout(d);
+                    else {
+                        var f = a(this);
+                        b = setTimeout(function() {
+                            f.addClass(c.current), e = !0
+                        }, c.delay)
+                    }
+                }).bind("mouseout", function() {
+                    if (e) {
+                        var f = a(this);
+                        d = setTimeout(function() {
+                            f.removeClass(c.current), e = !1
+                        }, c.delay)
+                    } else
+                        clearTimeout(b)
+                })
             })
-        })
-    }
-}(jQuery), function($) {
-    $.extend({_jsonp: {scripts: {},counter: 1,charset: "gb2312",head: document.getElementsByTagName("head")[0],name: function(callback) {
-                var name = "_jsonp_" + (new Date).getTime() + "_" + this.counter;
-                this.counter++;
-                var cb = function(json) {
-                    eval("delete " + name), callback(json), $._jsonp.head.removeChild($._jsonp.scripts[name]), delete $._jsonp.scripts[name]
-                };
-                return eval(name + " = cb"), name
-            },load: function(a, b) {
-                var c = document.createElement("script");
-                c.type = "text/javascript", c.charset = this.charset, c.src = a, this.head.appendChild(c), this.scripts[b] = c
-            }},getJSONP: function(a, b) {
+        }
+    }(jQuery), function($) {
+        $.extend({_jsonp: {scripts: {},counter: 1,charset: "gb2312",head: document.getElementsByTagName("head")[0],name: function(callback) {
+            var name = "_jsonp_" + (new Date).getTime() + "_" + this.counter;
+            this.counter++;
+            var cb = function(json) {
+                eval("delete " + name), callback(json), $._jsonp.head.removeChild($._jsonp.scripts[name]), delete $._jsonp.scripts[name]
+            };
+            return eval(name + " = cb"), name
+        },load: function(a, b) {
+            var c = document.createElement("script");
+            c.type = "text/javascript", c.charset = this.charset, c.src = a, this.head.appendChild(c), this.scripts[b] = c
+        }},getJSONP: function(a, b) {
             var c = $._jsonp.name(b), a = a.replace(/{callback};/, c);
             return $._jsonp.load(a, c), this
         }})
-}(jQuery), function(a) {
-    a.fn.jdTab = function(b, c) {
-        "function" == typeof b && (c = b, b = {});
-        var d = a.extend({type: "static",auto: !1,source: "data",event: "mouseover",currClass: "curr",tab: ".tab",content: ".tabcon",itemTag: "li",stay: 5e3,delay: 100,mainTimer: null,subTimer: null,index: 0}, b || {}), e = a(this).find(d.tab).eq(0).find(d.itemTag), f = a(this).find(d.content);
-        if (e.length != f.length)
-            return !1;
-        var g = d.source.toLowerCase().match(/http:\/\/|\d|\.aspx|\.ascx|\.asp|\.php|\.html\.htm|.shtml|.js|\W/g), h = function(a, b) {
-            d.subTimer = setTimeout(function() {
-                k(), b ? (d.index++, d.index == e.length && (d.index = 0)) : d.index = a, d.type = null != e.eq(d.index).attr(d.source) ? "dynamic" : "static", j()
-            }, d.delay)
-        }, i = function() {
-            d.mainTimer = setInterval(function() {
-                h(d.index, !0)
-            }, d.stay)
-        }, j = function() {
-            switch (e.eq(d.index).addClass(d.currClass), d.type) {
-                default:
-                case "static":
-                    var a = "";
-                    break;
-                case "dynamic":
-                    var a = null == g ? e.eq(d.index).attr(d.source) : d.source;
-                    e.eq(d.index).removeAttr(d.source)
-            }
-            c && c(a, f.eq(d.index), d.index), f.eq(d.index).show()
-        }, k = function() {
-            e.eq(d.index).removeClass(d.currClass), f.eq(d.index).hide()
-        };
-        e.each(function(b) {
-            a(this).bind(d.event, function() {
-                return clearTimeout(d.subTimer), clearInterval(d.mainTimer), h(b, !1), !0
-            }).bind("mouseleave", function() {
-                d.auto && i()
-            })
-        }), "dynamic" == d.type && h(d.index, !1), d.auto && i()
-    }
-}(jQuery), function(a) {
-    a.fn.jdSlide = function(b) {
-        var c, d, e, f = a.extend({width: null,height: null,pics: [],index: 0,type: "num",current: "curr",delay1: 100,delay2: 5e3}, b || {}), g = this, h = 0, i = !0, j = !0, k = f.pics.length, l = function() {
-            var b = "<ul style='position:absolute;top:0;left:0;'><li><a href='" + f.pics[0].href + "' target='_blank'><img src='" + f.pics[0].src + "' width='" + f.width + "' height='" + f.height + "' /></a></li></ul>";
-            g.css({position: "relative"}).html(b), a(function() {
-                p()
-            })
-        };
-        l();
-        var m = function() {
-            var a = [];
-            a.push("<div>");
-            for (var b, d, h = 0; k > h; h++) {
-                switch (b = h == f.index ? f.current : "", f.type) {
-                    case "num":
-                        d = h + 1;
+    }(jQuery), function(a) {
+        a.fn.jdTab = function(b, c) {
+            "function" == typeof b && (c = b, b = {});
+            var d = a.extend({type: "static",auto: !1,source: "data",event: "mouseover",currClass: "curr",tab: ".tab",content: ".tabcon",itemTag: "li",stay: 5e3,delay: 100,mainTimer: null,subTimer: null,index: 0}, b || {}), e = a(this).find(d.tab).eq(0).find(d.itemTag), f = a(this).find(d.content);
+            if (e.length != f.length)
+                return !1;
+            var g = d.source.toLowerCase().match(/http:\/\/|\d|\.aspx|\.ascx|\.asp|\.php|\.html\.htm|.shtml|.js|\W/g), h = function(a, b) {
+                d.subTimer = setTimeout(function() {
+                    k(), b ? (d.index++, d.index == e.length && (d.index = 0)) : d.index = a, d.type = null != e.eq(d.index).attr(d.source) ? "dynamic" : "static", j()
+                }, d.delay)
+            }, i = function() {
+                d.mainTimer = setInterval(function() {
+                    h(d.index, !0)
+                }, d.stay)
+            }, j = function() {
+                switch (e.eq(d.index).addClass(d.currClass), d.type) {
+                    default:
+                    case "static":
+                        var a = "";
                         break;
-                    case "string":
-                        d = f.pics[h].alt;
-                        break;
-                    case "image":
-                        d = "<img src='" + f.pics[h].breviary + "' />"
+                    case "dynamic":
+                        var a = null == g ? e.eq(d.index).attr(d.source) : d.source;
+                        e.eq(d.index).removeAttr(d.source)
                 }
-                a.push("<span class='"), a.push(b), a.push("'><a href='"), a.push(f.pics[h].href), a.push("' target='_blank'>"), a.push(d), a.push("</a></span>")
-            }
-            a.push("</div>"), g.append(a.join("")), g.find("span").bind("mouseover", function() {
-                j = !1, clearTimeout(c), clearTimeout(e);
-                var a = g.find("span").index(this);
-                f.index != a && (e = setInterval(function() {
-                    i && n(a)
-                }, f.delay1))
-            }).bind("mouseleave", function() {
-                j = !0, clearTimeout(c), clearTimeout(e), c = setTimeout(function() {
-                    n(f.index + 1, !0)
-                }, f.delay2)
-            })
-        }, n = function(a, b) {
-            a == k && (a = 0), d = setTimeout(function() {
-                g.find("span").eq(f.index).removeClass(f.current), g.find("span").eq(a).addClass(f.current), o(a, b)
-            }, 20)
-        }, o = function(a, b) {
-            var e = parseInt(h), l = Math.abs(e + f.index * f.height), m = Math.abs(a - f.index) * f.height, p = Math.ceil((m - l) / 4);
-            l == m ? (clearTimeout(d), b ? (f.index++, f.index == k && (f.index = 0)) : f.index = a, i = !0, i && j && (clearTimeout(c), c = setTimeout(function() {
-                n(f.index + 1, !0)
-            }, f.delay2))) : (f.index < a ? (h = e - p, g.find("ul").css({top: h + "px"})) : (h = e + p, g.find("ul").css({top: h + "px"})), i = !1, d = setTimeout(function() {
-                o(a, b)
-            }, 20))
-        }, p = function() {
-            for (var a = [], b = 1; k > b; b++)
-                a.push("<li><a href='"), a.push(f.pics[b].href), a.push("' target='_blank'><img src='"), a.push(f.pics[b].src), a.push("' width='"), a.push(f.width), a.push("' height='"), a.push(f.height), a.push("' /></a></li>");
-            g.find("ul").append(a.join("")), c = setTimeout(function() {
-                n(f.index + 1, !0)
-            }, f.delay2), f.type && m()
+                c && c(a, f.eq(d.index), d.index), f.eq(d.index).show()
+            }, k = function() {
+                e.eq(d.index).removeClass(d.currClass), f.eq(d.index).hide()
+            };
+            e.each(function(b) {
+                a(this).bind(d.event, function() {
+                    return clearTimeout(d.subTimer), clearInterval(d.mainTimer), h(b, !1), !0
+                }).bind("mouseleave", function() {
+                    d.auto && i()
+                })
+            }), "dynamic" == d.type && h(d.index, !1), d.auto && i()
         }
-    }
-}(jQuery), $.browser.isIE6)
+    }(jQuery), function(a) {
+        a.fn.jdSlide = function(b) {
+            var c, d, e, f = a.extend({width: null,height: null,pics: [],index: 0,type: "num",current: "curr",delay1: 100,delay2: 5e3}, b || {}), g = this, h = 0, i = !0, j = !0, k = f.pics.length, l = function() {
+                var b = "<ul style='position:absolute;top:0;left:0;'><li><a href='" + f.pics[0].href + "' target='_blank'><img src='" + f.pics[0].src + "' width='" + f.width + "' height='" + f.height + "' /></a></li></ul>";
+                g.css({position: "relative"}).html(b), a(function() {
+                    p()
+                })
+            };
+            l();
+            var m = function() {
+                var a = [];
+                a.push("<div>");
+                for (var b, d, h = 0; k > h; h++) {
+                    switch (b = h == f.index ? f.current : "", f.type) {
+                        case "num":
+                            d = h + 1;
+                            break;
+                        case "string":
+                            d = f.pics[h].alt;
+                            break;
+                        case "image":
+                            d = "<img src='" + f.pics[h].breviary + "' />"
+                    }
+                    a.push("<span class='"), a.push(b), a.push("'><a href='"), a.push(f.pics[h].href), a.push("' target='_blank'>"), a.push(d), a.push("</a></span>")
+                }
+                a.push("</div>"), g.append(a.join("")), g.find("span").bind("mouseover", function() {
+                    j = !1, clearTimeout(c), clearTimeout(e);
+                    var a = g.find("span").index(this);
+                    f.index != a && (e = setInterval(function() {
+                        i && n(a)
+                    }, f.delay1))
+                }).bind("mouseleave", function() {
+                    j = !0, clearTimeout(c), clearTimeout(e), c = setTimeout(function() {
+                        n(f.index + 1, !0)
+                    }, f.delay2)
+                })
+            }, n = function(a, b) {
+                a == k && (a = 0), d = setTimeout(function() {
+                    g.find("span").eq(f.index).removeClass(f.current), g.find("span").eq(a).addClass(f.current), o(a, b)
+                }, 20)
+            }, o = function(a, b) {
+                var e = parseInt(h), l = Math.abs(e + f.index * f.height), m = Math.abs(a - f.index) * f.height, p = Math.ceil((m - l) / 4);
+                l == m ? (clearTimeout(d), b ? (f.index++, f.index == k && (f.index = 0)) : f.index = a, i = !0, i && j && (clearTimeout(c), c = setTimeout(function() {
+                    n(f.index + 1, !0)
+                }, f.delay2))) : (f.index < a ? (h = e - p, g.find("ul").css({top: h + "px"})) : (h = e + p, g.find("ul").css({top: h + "px"})), i = !1, d = setTimeout(function() {
+                    o(a, b)
+                }, 20))
+            }, p = function() {
+                for (var a = [], b = 1; k > b; b++)
+                    a.push("<li><a href='"), a.push(f.pics[b].href), a.push("' target='_blank'><img src='"), a.push(f.pics[b].src), a.push("' width='"), a.push(f.width), a.push("' height='"), a.push(f.height), a.push("' /></a></li>");
+                g.find("ul").append(a.join("")), c = setTimeout(function() {
+                    n(f.index + 1, !0)
+                }, f.delay2), f.type && m()
+            }
+        }
+    }(jQuery), $.browser.isIE6)
     try {
         document.execCommand("BackgroundImageCache", !1, !0)
     } catch (err) {
     }
 var initScrollY = 0, proIDs = new Array, pannel = {};
 pannel.gotop = {settings: {element: null,target: "#header"},init: function(a, b) {
-        var c = this;
-        $.extend(this.settings, a || {}), b && b();
-        var d = function() {
-            screen.width >= 1280 ? c.render(0) : c.render(1)
-        };
-        d(), $(window).bind("scroll", function() {
-            d()
-        }).bind("resize", function() {
-            d()
-        })
-    },render: function(a) {
-        var b, c, d = $(this.settings.element), e = $(this.settings.target), f = $.browser.scroll().top + $.browser.client().height - d.height() - 10 + "px";
-        switch (a) {
-            case 0:
-                c = e.width() >= 1200 ? 1200 : 980, b = e.offset().left + c + "px", $.browser.isIE6 ? d.css({left: b,top: f}) : d.css({left: b,bottom: "0"});
-                break;
-            case 1:
-                $.browser.isIE6 ? d.css({right: "0",top: f}) : d.css({right: "0",bottom: "0"})
-        }
-    }}, String.prototype.format = function() {
+    var c = this;
+    $.extend(this.settings, a || {}), b && b();
+    var d = function() {
+        screen.width >= 1280 ? c.render(0) : c.render(1)
+    };
+    d(), $(window).bind("scroll", function() {
+        d()
+    }).bind("resize", function() {
+        d()
+    })
+},render: function(a) {
+    var b, c, d = $(this.settings.element), e = $(this.settings.target), f = $.browser.scroll().top + $.browser.client().height - d.height() - 10 + "px";
+    switch (a) {
+        case 0:
+            c = e.width() >= 1200 ? 1200 : 980, b = e.offset().left + c + "px", $.browser.isIE6 ? d.css({left: b,top: f}) : d.css({left: b,bottom: "0"});
+            break;
+        case 1:
+            $.browser.isIE6 ? d.css({right: "0",top: f}) : d.css({right: "0",bottom: "0"})
+    }
+}}, String.prototype.format = function() {
     var a = this, b = arguments.length;
     if (b > 0)
         for (var c = 0; b > c; c++)
