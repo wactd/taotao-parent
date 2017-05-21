@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by tiger on 17-4-24.
+ * 商品分类服务
+ *
+ * @author tiger
  */
 
 @Service
@@ -38,24 +40,34 @@ public class ItemCatServiceImpl implements ItemCatService {
     private List<?> getCatListByParentId(Long parentId, List<TbItemCat> itemCats) {
 
         List<TbItemCat> tbItemCats = itemCats.stream().filter(tbItemCat ->
-                                     tbItemCat.getParentId().equals(parentId)).collect(Collectors.toList());
+                tbItemCat.getParentId().equals(parentId)).collect(Collectors.toList());
 
         List resultList = new ArrayList<>();
-        tbItemCats.forEach(itemCat -> {
+        int count = 0;
+
+        for (TbItemCat itemCat : tbItemCats) {
+            // tbItemCats.forEach(itemCat -> {
+
+            // 判断是否是父节点
             if (itemCat.getIsParent()) {
                 CatNode node = new CatNode();
                 if (0 == parentId) {
-                    node.setName("<a href='/products/"+ itemCat.getId() +".html'>"+ itemCat.getName() +"</a>");
+                    node.setName("<a href='/products/" + itemCat.getId() + ".html'>" + itemCat.getName() + "</a>");
                 } else {
                     node.setName(itemCat.getName());
                 }
-                node.setUrl("/products/"+ itemCat.getId() +".html");
+                node.setUrl("/products/" + itemCat.getId() + ".html");
                 node.setItem(getCatListByParentId(itemCat.getId(), itemCats));
                 resultList.add(node);
+                count++;
+                if (parentId == 0 && count >= 14) {
+                    break;
+                }
             } else {
-                resultList.add("/products/"+itemCat.getId()+".html|" + itemCat.getName());
+                // 若为叶子节点
+                resultList.add("/products/" + itemCat.getId() + ".html|" + itemCat.getName());
             }
-        });
+        }
 
         return resultList;
     }
