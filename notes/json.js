@@ -6,7 +6,9 @@ $(function () {
             console.log(item);
             values[params[item].name] = params[item].value;
         }
+
         console.log(values);
+
         $.ajax({
             url: '/json1',
             type: 'POST',
